@@ -1,320 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tatti's Restaurant Munyonyo — African-inspired breakfast, lunch and evening meals in Munyonyo, Kampala. Order directly on WhatsApp.">
-  <title>Tatti's Restaurant Munyonyo</title>
-  <style>
-    :root{
-      --green:#123f36;
-      --deep:#0b2d27;
-      --gold:#d7a83b;
-      --cream:#fbf5e7;
-      --sand:#ead9b5;
-      --brown:#6b4327;
-      --white:#fffdf8;
-      --shadow:0 16px 45px rgba(18,63,54,.16);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family: Georgia, "Times New Roman", serif;
-      background:var(--cream);
-      color:#20312c;
-      line-height:1.6;
-    }
-    a{text-decoration:none;color:inherit}
-    .topbar{
-      background:var(--deep); color:#fff; text-align:center; padding:9px 15px;
-      font-family:Arial,sans-serif;font-size:.9rem;
-    }
-    header{
-      position:sticky;top:0;z-index:20;background:rgba(251,245,231,.96);
-      backdrop-filter:blur(10px);border-bottom:1px solid rgba(107,67,39,.12);
-    }
-    .nav{
-      max-width:1150px;margin:auto;padding:15px 22px;display:flex;align-items:center;
-      justify-content:space-between;gap:20px;
-    }
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand-mark{
-      width:48px;height:48px;border-radius:50%;background:var(--green);color:var(--gold);
-      display:grid;place-items:center;font-size:1.45rem;border:2px solid var(--gold);
-    }
-    .brand h1{font-size:1.25rem;color:var(--green);line-height:1.05}
-    .brand span{font-family:Arial,sans-serif;font-size:.72rem;color:var(--brown);letter-spacing:2px}
-    nav{display:flex;gap:25px;font-family:Arial,sans-serif;font-size:.9rem}
-    nav a:hover{color:var(--brown)}
-    .nav-btn,.btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      padding:12px 18px;border-radius:30px;font-family:Arial,sans-serif;font-weight:700;
-      border:1px solid var(--gold);cursor:pointer;transition:.2s;
-    }
-    .nav-btn{background:var(--green);color:#fff}
-    .nav-btn:hover,.btn:hover{transform:translateY(-2px)}
-    .menu-toggle{display:none;background:none;border:0;font-size:1.7rem;color:var(--green)}
-    .hero{
-      min-height:78vh;display:grid;grid-template-columns:1.05fr .95fr;max-width:1150px;
-      margin:auto;padding:55px 22px 70px;align-items:center;gap:50px;
-    }
-    .eyebrow{font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:3px;color:var(--brown);font-weight:700;font-size:.78rem}
-    .hero h2{font-size:clamp(2.7rem,6vw,5.2rem);line-height:.95;color:var(--green);margin:14px 0 22px}
-    .hero h2 em{color:var(--brown);font-style:normal}
-    .hero p{font-size:1.08rem;max-width:600px;color:#53645f}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .btn.primary{background:var(--green);color:#fff}
-    .btn.secondary{background:transparent;color:var(--green)}
-    .hero-image{
-      position:relative;border-radius:28px;overflow:hidden;box-shadow:var(--shadow);
-      border:8px solid #fffaf0;transform:rotate(1deg);
-    }
-    .hero-image img{display:block;width:100%;height:auto}
-    .badge{
-      position:absolute;bottom:18px;left:18px;background:var(--gold);color:var(--deep);
-      padding:12px 16px;border-radius:15px;font-family:Arial,sans-serif;font-weight:800;
-      box-shadow:0 8px 25px rgba(0,0,0,.15)
-    }
-    section{padding:80px 22px}
-    .wrap{max-width:1050px;margin:auto}
-    .section-title{text-align:center;margin-bottom:38px}
-    .section-title .eyebrow{font-size:.72rem}
-    .section-title h3{font-size:2.5rem;color:var(--green);margin-top:7px}
-    .section-title p{max-width:650px;margin:8px auto;color:#63726d}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .card{
-      background:var(--white);padding:28px;border-radius:22px;border:1px solid rgba(107,67,39,.1);
-      box-shadow:0 8px 30px rgba(18,63,54,.08);text-align:center;
-    }
-    .icon{font-size:2.1rem;margin-bottom:12px}
-    .card h4{color:var(--green);font-size:1.4rem;margin-bottom:8px}
-    .card p{color:#68746f;font-family:Arial,sans-serif;font-size:.93rem}
-    .menu-section{background:#173f37;color:#fff}
-    .menu-section .section-title h3{color:#fff}
-    .menu-section .section-title p{color:#d7e0dc}
-    .menu-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px;align-items:center}
-    .menu-points{display:grid;gap:15px}
-    .menu-point{padding:18px 20px;border:1px solid rgba(215,168,59,.35);border-radius:16px;background:rgba(255,255,255,.04)}
-    .menu-point strong{display:block;color:var(--gold);font-size:1.1rem}
-    .menu-point span{color:#dce7e2;font-family:Arial,sans-serif;font-size:.9rem}
-    .menu-photo{border-radius:22px;overflow:hidden;border:5px solid #f9edcf;box-shadow:var(--shadow)}
-    .menu-photo img{width:100%;display:block}
-    .about{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-    .about-box{background:#efe0bd;border-radius:24px;padding:35px;border-left:6px solid var(--gold)}
-    .about h3{font-size:2.2rem;color:var(--green);margin-bottom:12px}
-    .about p{color:#596762}
-    .info-list{display:grid;gap:16px;margin-top:20px;font-family:Arial,sans-serif}
-    .info-item{display:flex;gap:12px;align-items:flex-start}
-    .info-item b{color:var(--green)}
-    .contact{background:#efe0bd}
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
-    .contact-card{background:var(--white);border-radius:22px;padding:30px;box-shadow:0 8px 25px rgba(18,63,54,.08)}
-    .contact-card h4{color:var(--green);font-size:1.5rem;margin-bottom:12px}
-    .whatsapp-box{background:var(--green);color:#fff;border-radius:22px;padding:30px}
-    .whatsapp-box h4{color:#fff}
-    .order-form{display:grid;gap:12px;margin-top:15px}
-    input,textarea,select{
-      width:100%;padding:13px 14px;border-radius:10px;border:1px solid #d8c9aa;
-      background:#fffdf8;font:inherit;outline:none
-    }
-    textarea{min-height:90px;resize:vertical}
-    .send{border:0;background:#25d366;color:#073b25;padding:13px 18px;border-radius:12px;font-weight:800;cursor:pointer;font-family:Arial,sans-serif}
-    footer{background:var(--deep);color:#d9e3df;text-align:center;padding:35px 20px;font-family:Arial,sans-serif}
-    footer strong{color:var(--gold)}
-    .float-wa{position:fixed;right:20px;bottom:20px;z-index:30;background:#25d366;color:#073b25;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:1.6rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    @media(max-width:800px){ .cards{grid-template-columns:1fr!important;}
-      nav,.nav-btn{display:none}.menu-toggle{display:block}
-      nav.open{display:flex;position:absolute;top:78px;left:0;right:0;background:var(--cream);padding:20px 25px;flex-direction:column;border-bottom:1px solid #ddd}
-      .hero,.about,.contact-grid,.menu-layout{grid-template-columns:1fr}
-      .hero{padding-top:35px}
-      .hero-image{max-width:650px;margin:auto}
-      .cards{grid-template-columns:1fr}
-      section{padding:60px 18px}
-    }
-    @media(max-width:480px){
-      .brand h1{font-size:1rem}.hero h2{font-size:3rem}
-      .actions .btn{width:100%}
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tatti's Restaurant Munyonyo</title>
+<meta name="description" content="Tatti's Restaurant Munyonyo — delicious local Ugandan food, fresh fish, luwombo and chapati. Order directly on WhatsApp.">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="topbar">Open every day • 8:00 AM – 11:30 PM • Munyonyo Center</div>
-
-  <header>
-    <div class="nav">
-      <a class="brand" href="#home">
-        <div class="brand-mark">T</div>
-        <div><h1>Tatti's Restaurant</h1><span>MUNYONYO</span></div>
-      </a>
-      <nav id="nav">
-        <a href="#home">Home</a>
-        <a href="#food-menu">Menu</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </nav>
-      <a class="nav-btn" href="https://wa.me/256741783136?text=Hello%20Tatti%27s%20Restaurant%2C%20I%27d%20like%20to%20place%20an%20order.">Order on WhatsApp</a>
-      <button class="menu-toggle" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Open menu">☰</button>
-    </div>
-  </header>
-
-  <main id="home">
-    <section class="hero">
-      <div>
-        <div class="eyebrow">Taste • Tradition • Togetherness</div>
-        <h2>Welcome to <em>Tatti's</em> Restaurant</h2>
-        <p>Enjoy delicious and memorable African-inspired meals, breakfast, lunch and evening dishes in the heart of Munyonyo. Dine with us or order directly on WhatsApp.</p>
-        <div class="actions">
-          <a class="btn primary" href="#menu">Explore Our Menu</a>
-          <a class="btn secondary" href="https://wa.me/256741783136?text=Hello%20Tatti%27s%20Restaurant%2C%20I%27d%20like%20to%20place%20an%20order.">💬 Order on WhatsApp</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="restaurant-menu.jpg" alt="Tatti's Restaurant Munyonyo food menu and dishes">
-        <div class="badge">Fresh • African • Delicious</div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <div class="section-title">
-          <div class="eyebrow">What's cooking</div>
-          <h3>Something delicious for every time of day</h3>
-          <p>Start your morning right, enjoy a satisfying lunch, or wind down with a hearty evening meal.</p>
-        </div>
-        <div class="cards">
-          <div class="card"><div class="icon">☀️</div><h4>Breakfast</h4><p>Comforting morning favourites and fresh accompaniments to start your day.</p></div>
-          <div class="card"><div class="icon">🍛</div><h4>Lunch</h4><p>Enjoy filling, flavorful meals made for a proper Ugandan lunch break.</p></div>
-          <div class="card"><div class="icon">🌙</div><h4>Evening Meal</h4><p>Relax and enjoy a satisfying meal with family and friends into the evening.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="food-menu" style="background:#fbf5e7;">
-      <div class="wrap">
-        <div class="section-title">
-          <div class="eyebrow">Food & prices</div>
-          <h3>Today's favourites</h3>
-          <p>Freshly prepared meals at Tatti's Restaurant Munyonyo.</p>
-        </div>
-        <div class="cards" style="grid-template-columns:repeat(3,1fr);">
-          <div class="card"><h4>Fresh Fish</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 20,000</p></div>
-          <div class="card"><h4>Fried Fish</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 20,000</p></div>
-          <div class="card"><h4>Dry Fish</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 15,000</p></div>
-          <div class="card"><h4>Beef</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 15,000</p></div>
-          <div class="card"><h4>Goat's Meat</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 15,000</p></div>
-          <div class="card"><h4>Chicken</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 15,000</p></div>
-          <div class="card"><h4>Beans</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 10,000</p></div>
-          <div class="card"><h4>Cowpeas</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 10,000</p></div>
-          <div class="card"><h4>Katogo</h4><p style="font-size:1.35rem;font-weight:800;color:#6b4327;">UGX 10,000</p><p style="margin-top:5px;">Comes with rice, offals, beef, liver & fish.</p></div>
-        </div>
-        <div style="margin-top:25px;padding:18px 22px;background:#efe0bd;border-radius:16px;text-align:center;color:#173f37;font-family:Arial,sans-serif;">
-          <strong>Delivery note:</strong> Add UGX 2,000 for packing on deliveries. <strong>Katogo is exempt from the packing charge.</strong>
-        </div>
-      </div>
-    </section>
-
-    <section class="menu-section" id="menu">
-      <div class="wrap">
-        <div class="section-title">
-          <div class="eyebrow">Our menu</div>
-          <h3>Good food, African soul</h3>
-          <p>See our menu artwork below, then message us on WhatsApp for today's dishes, prices and to place your order.</p>
-        </div>
-        <div class="menu-layout">
-          <div class="menu-points">
-            <div class="menu-point"><strong>Breakfast</strong><span>Morning favourites served fresh from 8:00 AM.</span></div>
-            <div class="menu-point"><strong>Lunch</strong><span>Delicious and satisfying meals for your day.</span></div>
-            <div class="menu-point"><strong>Evening Meals</strong><span>Hearty dishes for relaxed evenings.</span></div>
-            <div class="menu-point"><strong>Juice & Refreshments</strong><span>Fresh, refreshing drinks to complement your meal.</span></div>
-            <a class="btn" style="background:var(--gold);color:var(--deep);border-color:var(--gold)" href="https://wa.me/256741783136?text=Hello%20Tatti%27s%20Restaurant%2C%20please%20send%20me%20today%27s%20menu%20and%20prices.">Ask for today's prices →</a>
-          </div>
-          <div class="menu-photo"><img src="restaurant-menu.jpg" alt="Tatti's Restaurant menu poster"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="wrap about">
-        <div>
-          <div class="eyebrow">About Tatti's</div>
-          <h3>Made for good food and good company.</h3>
-          <p>At Tatti's Restaurant Munyonyo, we welcome you for tasty meals in a warm African-inspired setting. Whether you're grabbing breakfast, meeting someone for lunch, or enjoying an evening meal, we're ready to serve you.</p>
-          <div class="info-list">
-            <div class="info-item">📍 <div><b>Location</b><br>Munyonyo Center, Kampala</div></div>
-            <div class="info-item">🕐 <div><b>Opening hours</b><br>Every day, 8:00 AM – 11:30 PM</div></div>
-            <div class="info-item">📞 <div><b>Call / WhatsApp</b><br>+256 741 783 136</div></div>
-          </div>
-        </div>
-        <div class="about-box">
-          <h3>Visit us today</h3>
-          <p>We're conveniently located around Munyonyo Center. For directions, reservations, menu questions or takeaway orders, contact us directly.</p>
-          <div class="actions">
-            <a class="btn primary" href="tel:+256741783136">📞 Call us</a>
-            <a class="btn secondary" href="https://wa.me/256741783136?text=Hello%20Tatti%27s%20Restaurant%2C%20I%27d%20like%20to%20ask%20about%20your%20restaurant.">💬 WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="wrap">
-        <div class="section-title">
-          <div class="eyebrow">Order & contact</div>
-          <h3>Order directly on WhatsApp</h3>
-          <p>Fill in the quick form and your order message will open in WhatsApp, ready for you to send.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="whatsapp-box">
-            <h4>Place your order</h4>
-            <p>Tell us what you'd like and we'll confirm availability, price and pickup/delivery details.</p>
-            <form class="order-form" onsubmit="sendOrder(event)">
-              <input id="name" required placeholder="Your name">
-              <input id="item" required placeholder="What would you like to order?">
-              <input id="quantity" placeholder="Quantity (e.g. 2)">
-              <textarea id="notes" placeholder="Extra details / special request"></textarea>
-              <button class="send" type="submit">Send Order on WhatsApp</button>
-            </form>
-          </div>
-          <div class="contact-card">
-            <h4>Find & contact us</h4>
-            <p>📍 <strong>Munyonyo Center</strong><br>Kampala, Uganda</p>
-            <p style="margin-top:14px">📞 <strong>+256 741 783 136</strong></p>
-            <p style="margin-top:14px">🕐 <strong>Open daily</strong><br>8:00 AM – 11:30 PM</p>
-            <div class="actions">
-              <a class="btn primary" href="tel:+256741783136">Call now</a>
-              <a class="btn secondary" href="https://wa.me/256741783136">WhatsApp</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p><strong>Tatti's Restaurant Munyonyo</strong></p>
-    <p>Munyonyo Center • Kampala • Uganda</p>
-    <p style="margin-top:8px">© <span id="year"></span> Tatti's Restaurant. All rights reserved.</p>
-  </footer>
-
-  <a class="float-wa" href="https://wa.me/256741783136?text=Hello%20Tatti%27s%20Restaurant%2C%20I%27d%20like%20to%20place%20an%20order." aria-label="Order on WhatsApp">☘</a>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-    function sendOrder(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const item = document.getElementById('item').value.trim();
-      const quantity = document.getElementById('quantity').value.trim() || 'Not specified';
-      const notes = document.getElementById('notes').value.trim() || 'None';
-      const message =
-        `Hello Tatti's Restaurant Munyonyo!%0A%0A` +
-        `Name: ${encodeURIComponent(name)}%0A` +
-        `Order: ${encodeURIComponent(item)}%0A` +
-        `Quantity: ${encodeURIComponent(quantity)}%0A` +
-        `Extra details: ${encodeURIComponent(notes)}%0A%0A` +
-        `Please confirm the price and availability.`;
-      window.open(`https://wa.me/256741783136?text=${message}`, '_blank');
-    }
-  </script>
-</body>
-</html>
+<header class="topbar">
+  <div class="brand"><div class="pot">♨</div><div><div class="script">Tatti’s</div><strong>RESTAURANT</strong><small>MUNYONYO</small></div></div>
+  <div class="hours"><span>◷</span><div><b>OPENING HOURS</b><strong>8:00AM – 11:30PM</strong><small>EVERY DAY</small></div></div>
+  <a class="wa" href="#order">🟢 ORDER ON WHATSAPP</a>
+</header>
+<nav><a href="#home">HOME</a><a class="active" href="#menu">MENU</a><a href="#order">ORDER</a><a href="#about">ABOUT US</a><a href="#contact">CONTACT</a><a href="#location">LOCATION</a></nav>
+<section id="home" class="hero"><div class="hero-overlay"><p class="eyebrow">Tatti’s Restaurant Munyonyo</p><h1>OUR MENU</h1><div class="ornament">◆ ─ ◆ ─ ◆</div><p>Delicious local dishes made with love<br>and the finest ingredients.</p><div class="location">📍 <b>MUNYONYO CENTER</b><span>Next to Speke Resort Munyonyo</span></div></div></section>
+<main id="menu">
+  <div class="section-title"><span>〰〰</span><h2>OUR <em>DELICIOUS FOOD</em></h2><span>〰〰</span></div>
+  <p class="note">Order your favourites directly on WhatsApp. Prices are in Ugandan Shillings (UGX).</p>
+  <section class="grid">
+    <article class="card"><img src="assets/fresh-fish.jpg" alt="Fresh fish"><div class="cardbody"><h3>FRESH FISH</h3><span class="price">20K</span></div></article>
+    <article class="card"><div class="placeholder">FRIED<br>FISH</div><div class="cardbody"><h3>FRIED FISH</h3><span class="price">20K</span></div></article>
+    <article class="card"><div class="placeholder">DRY<br>FISH</div><div class="cardbody"><h3>DRY FISH</h3><span class="price">15K</span></div></article>
+    <article class="card"><div class="placeholder">BEEF</div><div class="cardbody"><h3>BEEF</h3><span class="price">15K</span></div></article>
+    <article class="card"><div class="placeholder">GOAT’S<br>MEAT</div><div class="cardbody"><h3>GOAT’S MEAT</h3><span class="price">15K</span></div></article>
+    <article class="card"><div class="placeholder">CHICKEN</div><div class="cardbody"><h3>CHICKEN</h3><span class="price">15K</span></div></article>
+    <article class="card"><div class="placeholder">BEANS</div><div class="cardbody"><h3>BEANS</h3><span class="price">10K</span></div></article>
+    <article class="card"><div class="placeholder">COWPEAS</div><div class="cardbody"><h3>COWPEAS</h3><span class="price">10K</span></div></article>
+    <article class="card"><img src="assets/food2.jpg" alt="Local food plate"><div class="cardbody"><h3>LOCAL FOOD</h3><span class="no-price">PRICE ON REQUEST</span></div></article>
+    <article class="card featured"><img src="assets/luwombo.jpg" alt="Luwombo"><div class="cardbody"><h3>LUWOMBO</h3><span class="price">15K</span></div></article>
+    <article class="card featured"><img src="assets/chapati.jpg" alt="Chapati"><div class="cardbody"><h3>CHAPATI</h3><span class="price">2K <small>(Each)</small></span></div></article>
+    <article class="card"><img src="assets/food1.jpg" alt="Local Ugandan food"><div class="cardbody"><h3>LOCAL FOOD</h3><span class="no-price">PRICE ON REQUEST</span></div></article>
+    <article class="card"><div class="placeholder">KATOGO</div><div class="cardbody"><h3>KATOGO</h3><p>(With rice, offals, beef, liver, fish)</p><span class="price">10K</span></div></article>
+  </section>
+  <div class="delivery"><b>DELIVERY / PACKING CHARGE</b><span>Extra 2K for packing — except for Katogo.</span></div>
+</main>
+<section id="order" class="cta"><div><h2>CRAVING SOMETHING DELICIOUS?</h2><p>Order directly on WhatsApp and we'll prepare your food fresh.</p></div><a class="orderbtn" href="https://wa.me/?text=Hello%20Tatti%27s%20Restaurant%20Munyonyo%2C%20I%20would%20like%20to%20place%20an%20order." target="_blank" rel="noopener">🟢 ORDER NOW ON WHATSAPP</a></section>
+<section id="about" class="about"><h2>ABOUT TATTI’S</h2><p>Authentic local flavours, freshly prepared for our guests in Munyonyo.</p></section>
+<footer id="contact"><div><b>📍 FIND US</b><p>Tatti’s Restaurant Munyonyo</p><p>Open every day · 8:00AM – 11:30PM</p></div><div id="location"><a href="https://www.google.com/maps/search/?api=1&query=Tatti%27s%20Restaurant%20Munyonyo" target="_blank" rel="noopener">📍 FIND US ON GOOGLE MAPS</a><p>© 2026 Tatti’s Restaurant Munyonyo. All Rights Reserved.</p></div></footer>
+</body></html>
